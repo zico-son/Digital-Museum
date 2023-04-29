@@ -19,8 +19,8 @@ class EventSerializer(ModelSerializer):
 
 class InfoSerializer(ModelSerializer):
     event = EventSerializer(many =True)
-    media = MediaSerializer()
-    openinghours = OpenningHourSerializer()
+    media = MediaSerializer(many =True)
+    openinghours = OpenningHourSerializer(many =True)
     class Meta:
         model = MuseumInfo
         fields = ['name','about','contact_mail','contact_phone','address','event','media','openinghours']
