@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ArtsHub.models import Hall, ArtObject, ArtStory, Chariot, Painting, Other, Holding, BorrowedCollection, PermenatantCollection, ArtObjectImage
+from ArtsHub.models import Hall, ArtObject, ArtStory, Chariot, Painting, Other, Holding, BorrowedCollection, PermanentCollection, ArtObjectImage
 
 
 class HallSerializer(serializers.ModelSerializer):
@@ -30,16 +30,16 @@ class OtherSerializer(serializers.ModelSerializer):
 class HoldingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Holding
-        fields = ['matrial']
+        fields = ['material']
 
 class BorrowedCollectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = BorrowedCollection
         fields = ['date_of_borrowing', 'date_of_return']
 
-class PermenatantCollectionSerializer(serializers.ModelSerializer):
+class PermanentCollectionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = PermenatantCollection
+        model = PermanentCollection
         fields = ['date_of_acquisition']
 
 class ArtObjectImageSerializer(serializers.ModelSerializer):
@@ -95,11 +95,11 @@ class ArtObjectSerializer(serializers.ModelSerializer):
             if obj.borrowed_collection:
                 return 'borrowed'
         except:
-            return 'permenatant'
+            return 'Permanent'
 
     def get_status_info(self, obj):
         try:
             if obj.borrowed_collection:
                 return BorrowedCollectionSerializer(obj.borrowed_collection).data
         except:
-            return PermenatantCollectionSerializer(obj.permenatant_collection).data
+            return PermanentCollectionSerializer(obj.permanent_collection).data

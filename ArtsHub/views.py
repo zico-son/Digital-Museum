@@ -20,6 +20,6 @@ class ArtObjectViewSet(ReadOnlyModelViewSet):
         .select_related('painting') \
         .select_related('other') \
         .select_related('borrowed_collection') \
-        .select_related('permenatant_collection') \
+        .select_related('permanent_collection') \
         .all()
     serializer_class = ArtObjectSerializer

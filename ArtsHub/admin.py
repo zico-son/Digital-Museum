@@ -1,5 +1,5 @@
 from django.contrib import admin
-from ArtsHub.models import Hall, ArtObject, ArtStory, Chariot, Painting, Other, Holding, BorrowedCollection, PermenatantCollection , ArtObjectImage
+from ArtsHub.models import Hall, ArtObject, ArtStory, Chariot, Painting, Other, Holding, BorrowedCollection, PermanentCollection , ArtObjectImage
 
 class ArtStoryInline(admin.StackedInline):
     model = ArtStory
@@ -37,8 +37,8 @@ class HoldingAdmin(admin.ModelAdmin):
 class BorrowedCollectionAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(PermenatantCollection)
-class PermenatantCollectionAdmin(admin.ModelAdmin):
+@admin.register(PermanentCollection)
+class PermanentCollectionAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(ArtObjectImage)

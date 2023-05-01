@@ -76,7 +76,7 @@ class Other(BaseModel):
             return ""
 
 class Holding(BaseModel):
-    matrial = models.CharField(max_length=255)
+    material = models.CharField(max_length=255)
     art_object = models.ForeignKey(ArtObject, on_delete=models.CASCADE, related_name='holdings')
     def __str__(self):
         try:
@@ -94,9 +94,9 @@ class BorrowedCollection(BaseModel):
         except:
             return ""
 
-class PermenatantCollection(BaseModel):
+class PermanentCollection(BaseModel):
     date_of_acquisition = models.DateField()
-    art_object = models.OneToOneField(ArtObject, on_delete=models.CASCADE, related_name='permenatant_collection', primary_key=True)
+    art_object = models.OneToOneField(ArtObject, on_delete=models.CASCADE, related_name='permanent_collection', primary_key=True)
     def __str__(self):
         try:
             return self.art_object.name
