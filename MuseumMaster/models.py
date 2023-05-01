@@ -54,7 +54,7 @@ class Event(models.Model):
         return self.name
     
 class Media(models.Model):
-    media = models.ImageField(upload_to= 'images', blank= True, null=True)
+    media = models.FileField(upload_to= 'images', blank= True, null=True)
     name = models.CharField(max_length=255, blank= True,null = True)
     museum_info = models.ForeignKey('MuseumInfo', on_delete=models.PROTECT,related_name= 'media')
 
