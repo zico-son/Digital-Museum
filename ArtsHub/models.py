@@ -1,4 +1,5 @@
 from django.db import models
+from MuseumMaster.models import Media
 # Create your models here.
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -20,6 +21,7 @@ class ArtObject(BaseModel):
     hall = models.ForeignKey(Hall, on_delete=models.CASCADE, related_name='art_object')
     active = models.BooleanField(default=False)
     highlighted = models.BooleanField(default=False)
+    media = models.ForeignKey(Media, related_name='art_objects', on_delete=models.PROTECT)
 
     def __str__ (self):
         return self.name
