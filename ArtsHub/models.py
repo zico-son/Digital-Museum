@@ -8,7 +8,7 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
-class Hall(BaseModel):
+class Hall(models.Model):
     name = models.CharField(max_length=255)
     # hall.art_object.all()
     def __str__(self):
@@ -21,14 +21,14 @@ class ArtObject(BaseModel):
     hall = models.ForeignKey(Hall, on_delete=models.CASCADE, related_name='art_object')
     active = models.BooleanField(default=False)
     highlighted = models.BooleanField(default=False)
-    media = models.ForeignKey(Media, related_name='art_objects', on_delete=models.PROTECT)
+    media = models.ForeignKey(Media, related_name='art_objects', on_delete=models.PROTECT, default=1)
 
     def __str__ (self):
         return self.name
     class Meta:
         ordering = ['-created_at']
 
-class ArtObjectImage(BaseModel):
+class ArtObjectImage(models.Model):
     art_object = models.ForeignKey(ArtObject, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='images/')
     def __str__(self):
@@ -37,7 +37,7 @@ class ArtObjectImage(BaseModel):
         except:
             return ""
 
-class ArtStory(BaseModel):
+class ArtStory(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     art_object = models.OneToOneField(ArtObject, on_delete=models.CASCADE, related_name='art_story', primary_key=True)
@@ -47,7 +47,7 @@ class ArtStory(BaseModel):
         except:
             return ""
 
-class Chariot(BaseModel):
+class Chariot(models.Model):
     object_number = models.CharField(max_length=255)
     origin = models.CharField(max_length=255)
     chassis_number = models.CharField(max_length=255)
@@ -58,7 +58,7 @@ class Chariot(BaseModel):
         except:
             return ""
 
-class Painting(BaseModel):
+class Painting(models.Model):
     artist_name = models.CharField(max_length=255)
     art_object = models.OneToOneField(ArtObject, on_delete=models.CASCADE, related_name='painting', primary_key=True)
     def __str__(self):
@@ -68,7 +68,7 @@ class Painting(BaseModel):
             return ""
     
 
-class Other(BaseModel):
+class Other(models.Model):
     origin = models.CharField(max_length=255)
     art_object = models.OneToOneField(ArtObject, on_delete=models.CASCADE, related_name='other', primary_key=True)
     def __str__(self):
@@ -77,7 +77,7 @@ class Other(BaseModel):
         except:
             return ""
 
-class Holding(BaseModel):
+class Holding(models.Model):
     material = models.CharField(max_length=255)
     art_object = models.ForeignKey(ArtObject, on_delete=models.CASCADE, related_name='holdings')
     def __str__(self):
@@ -86,7 +86,7 @@ class Holding(BaseModel):
         except:
             return ""
 
-class BorrowedCollection(BaseModel):
+class BorrowedCollection(models.Model):
     date_of_borrowing = models.DateField()
     date_of_return = models.DateField()
     art_object = models.OneToOneField(ArtObject, on_delete=models.CASCADE, related_name='borrowed_collection', primary_key=True)
@@ -96,7 +96,7 @@ class BorrowedCollection(BaseModel):
         except:
             return ""
 
-class PermanentCollection(BaseModel):
+class PermanentCollection(models.Model):
     date_of_acquisition = models.DateField()
     art_object = models.OneToOneField(ArtObject, on_delete=models.CASCADE, related_name='permanent_collection', primary_key=True)
     def __str__(self):
