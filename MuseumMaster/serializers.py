@@ -24,11 +24,17 @@ class EventSerializer(ModelSerializer):
         model = Event
         fields = ['name','date','start_time','end_time','event_about']
 
+class DownloadableItemsSerializer(ModelSerializer):
+    class Meta:
+        model = DownloadableItems
+        fields = ['name','link']
+
 class InfoSerializer(ModelSerializer):
-    event = EventSerializer(many =True)
     media = MediaSerializer(many =True)
-    openinghours = OpenningHourSerializer(many =True)
+    openinghours = OpenningHourSerializer(many =True)   
+    downloadableItems = DownloadableItemsSerializer(many = True)
     class Meta:
         model = MuseumInfo
-        fields = ['name','about','contact_mail','contact_phone','address','event','media','openinghours']
+        fields = ['name','about','contact_mail','contact_phone','address','media','openinghours','downloadableItems']
 
+    
