@@ -30,11 +30,14 @@ class DownloadableItemsSerializer(ModelSerializer):
         fields = ['name','link']
 
 class InfoSerializer(ModelSerializer):
+    event = serializers.SerializerMethodField()
     media = MediaSerializer(many =True)
     openinghours = OpenningHourSerializer(many =True)   
     downloadableItems = DownloadableItemsSerializer(many = True)
     class Meta:
         model = MuseumInfo
-        fields = ['name','about','contact_mail','contact_phone','address','media','openinghours','downloadableItems']
+        fields = ['name','about','contact_mail','contact_phone','address','event','media','openinghours','downloadableItems']
 
-    
+    def get_event(self, obj):
+        event = Event.objects.filter(active = True)
+        return EventSerializer(event, many = True).data
