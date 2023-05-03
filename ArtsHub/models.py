@@ -18,7 +18,7 @@ class ArtObject(BaseModel):
     name = models.CharField(max_length=255)
     epoch = models.CharField(max_length=255)
     description = models.TextField()
-    hall = models.ForeignKey(Hall, on_delete=models.CASCADE, related_name='art_object')
+    hall = models.ForeignKey(Hall, on_delete=models.SET_DEFAULT, related_name='art_object', default=8)
     active = models.BooleanField(default=False)
     highlighted = models.BooleanField(default=False)
     media = models.ForeignKey(Media, related_name='art_objects', on_delete=models.PROTECT, default=1)
