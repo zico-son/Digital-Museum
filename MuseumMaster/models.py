@@ -15,12 +15,6 @@ class MuseumInfo(models.Model):
     def __str__(self) -> str:
                 return self.name
     
-@receiver(pre_save, sender=MuseumInfo)
-def limit_website_instances(sender, instance, **kwargs):
-    # Check the number of instances of the Website model
-    website_info_count = MuseumInfo.objects.count()
-    if website_info_count > 0 and not instance.pk:
-        raise ValidationError('Information of the Website can be entered only once')    
         
     
 class OpenningHour(models.Model):
