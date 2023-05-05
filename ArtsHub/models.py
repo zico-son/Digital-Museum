@@ -13,6 +13,8 @@ class Hall(models.Model):
     # hall.art_object.all()
     def __str__(self):
         return self.name
+    class Meta:
+        ordering = ['name'] 
 
 class ArtObject(BaseModel):
     name = models.CharField(max_length=255)
