@@ -42,6 +42,7 @@ class Event(models.Model):
     start_time = models.TimeField(null=True,blank=True)
     end_time = models.TimeField(null=True,blank=True)
     event_about = models.TextField(null=True,blank=True)
+    active = models.BooleanField(default=False)
     museum_info = models.ForeignKey('MuseumInfo',related_name= 'event', on_delete=models.CASCADE)
 
     def __str__(self) -> str:
@@ -56,5 +57,7 @@ class Media(models.Model):
         return self.name
 
     
-
-
+class DownloadableItems(models.Model):
+    name = models.CharField(max_length=255,null=True,blank=True)
+    link = models.FileField(upload_to= 'files', blank= True, null=True)
+    museum_info = models.ForeignKey('MuseumInfo', on_delete=models.PROTECT,related_name= 'downloadableItems')
