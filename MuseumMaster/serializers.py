@@ -10,14 +10,14 @@ class OpenningHourSerializer(ModelSerializer):
         fields = ['day','open_time','close_time']
 
 class MediaSerializer(ModelSerializer):
-    art_objects = serializers.SerializerMethodField()
+    #art_objects = serializers.SerializerMethodField()
     class Meta:
         model = Media
-        fields = ['media','name' , 'art_objects']
+        fields = ['media','name'  ]
     
-    def get_art_objects(self, obj):
-        art_objects = ArtObject.objects.select_related('hall', 'art_story', 'chariot', 'painting', 'other', 'borrowed_collection', 'permanent_collection').prefetch_related('images', 'holdings').filter(highlighted = True)
-        return ArtObjectSerializer(art_objects, many = True).data
+    # def get_art_objects(self, obj):
+    #     art_objects = ArtObject.objects.select_related('hall', 'art_story', 'chariot', 'painting', 'other', 'borrowed_collection', 'permanent_collection').prefetch_related('images', 'holdings').filter(highlighted = True)
+    #     return ArtObjectSerializer(art_objects, many = True).data
 
 class EventSerializer(ModelSerializer):
     class Meta:
