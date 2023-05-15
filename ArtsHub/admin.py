@@ -1,8 +1,8 @@
-from typing import Optional
 from django.contrib import admin
 from django.http.request import HttpRequest
 from ArtsHub.models import Hall, ArtObject, ArtStory, Chariot, Painting, Other, Holding, BorrowedCollection, PermanentCollection , ArtObjectImage
-
+from django.contrib import messages
+from django.shortcuts import redirect
 
 @admin.register(Hall)
 class HallAdmin(admin.ModelAdmin):
@@ -104,6 +104,7 @@ class ArtObjectImageAdmin(admin.ModelAdmin):
     list_per_page = 10
     list_display = ['art_object', 'image']
     search_fields = ['art_object__name', 'image']
+    readonly_fields = ['size_before_convert','size_after_convert', 'compression_ratio', 'quality']
 
 
 class ArtStoryInline(admin.StackedInline):
@@ -129,7 +130,8 @@ class PermanentCollectionInline(admin.StackedInline):
     extra = 0
 class ArtObjectImageInline(admin.StackedInline):
     model = ArtObjectImage
-    extra = 0
+    extra = 1
+    fields = ['image', 'convert_image', 'quality']
 
 @admin.register(ArtObject)
 class ArtObjectAdmin(admin.ModelAdmin):
@@ -153,3 +155,19 @@ class ArtObjectAdmin(admin.ModelAdmin):
         .select_related('borrowed_collection') \
         .select_related('permanent_collection') \
         .all()
+    def message_user(self, request: HttpRequest, message: str, level: int | str = ..., extra_tags: str = ..., fail_silently: bool = ...) -> None:
+        pass
+    def save_model(self, request, obj, form, change):
+        return super().save_model(request, obj, form, change)
+
+    def response_change(self, request, obj):
+        try:
+            last = obj.images.last().id
+        except:
+            messages.success(request, f'Art Object updated successfully')
+            return redirect(f'/admin/ArtsHub/artobject/')
+        if obj.images.last().convert_image:
+            messages.success(request, f'Image converted successfully')
+            return redirect(f'/admin/ArtsHub/artobjectimage/{last}/change/')
+        messages.success(request, f'Art Object updated successfully')
+        return redirect(f'/admin/ArtsHub/artobject/')
