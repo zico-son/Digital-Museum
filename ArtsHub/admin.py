@@ -130,7 +130,7 @@ class PermanentCollectionInline(admin.StackedInline):
     extra = 0
 class ArtObjectImageInline(admin.StackedInline):
     model = ArtObjectImage
-    extra = 1
+    extra = 0
     fields = ['image', 'convert_image', 'quality']
 
 @admin.register(ArtObject)
@@ -155,7 +155,7 @@ class ArtObjectAdmin(admin.ModelAdmin):
         .select_related('borrowed_collection') \
         .select_related('permanent_collection') \
         .all()
-    def message_user(self, request: HttpRequest, message: str, level: int | str = ..., extra_tags: str = ..., fail_silently: bool = ...) -> None:
+    def message_user(self):
         pass
     def save_model(self, request, obj, form, change):
         return super().save_model(request, obj, form, change)
