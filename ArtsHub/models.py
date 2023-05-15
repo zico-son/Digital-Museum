@@ -1,5 +1,7 @@
 from django.db import models
 from MuseumMaster.models import Media
+from ArtsHub.utils import *
+from django.contrib import messages
 # Create your models here.
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -32,7 +34,26 @@ class ArtObject(BaseModel):
 
 class ArtObjectImage(models.Model):
     art_object = models.ForeignKey(ArtObject, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='images/')
+    image = models.FileField(upload_to='images/')
+    convert_image = models.BooleanField(default=False)
+    size_before_convert = models.FloatField(default=0, verbose_name = 'size before convert in MB')
+    size_after_convert = models.FloatField(default=0, verbose_name= 'size after convert in MB')
+    compression_ratio = models.FloatField(default=0, verbose_name='compression ratio %')
+    quality = models.IntegerField(default=50, verbose_name='quality % (default = 50 %)', blank=True)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.convert_image:
+            self.size_before_convert = rounding_image_size(get_file_size(self.image.path))          
+            image_name = self.image.name
+            convert_image(self.image.path, get_image_extension(image_name), get_image_name(image_name), self.quality)
+            self.image = get_image_save_path(image_name)
+            super().save(*args, **kwargs)
+            self.size_after_convert = rounding_image_size(get_file_size(self.image.path))
+            rounding_image_size(self.size_after_convert)
+            self.compression_ratio = rounding_image_size(get_compression_ratio(self.size_before_convert, self.size_after_convert))
+            super().save(*args, **kwargs)
+
     def __str__(self):
         try:
             return self.art_object.name
