@@ -23,6 +23,7 @@ urlpatterns = [
     path('arts/', include(('ArtsHub.urls', 'ArtsHub'))),
     path('__debug__/', include('debug_toolbar.urls')),
     path('', include('MuseumMaster.urls')),
+    path('reservation/', include('TicketReservation.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
