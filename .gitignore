@@ -7,3 +7,4 @@ migrations
 .VSCodeCounter/
 .env
 static
+db.sqlite3
