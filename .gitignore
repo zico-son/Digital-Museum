@@ -5,3 +5,5 @@ Pipfile
 Pipfile.lock
 migrations
 .VSCodeCounter/
+.env
+static
