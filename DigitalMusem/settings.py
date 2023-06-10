@@ -23,7 +23,7 @@ environ.Env.read_env()
 
 SECRET_KEY = env('SECRET_KEY') 
 
-DEBUG = 0 
+DEBUG = 1
 
 ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
