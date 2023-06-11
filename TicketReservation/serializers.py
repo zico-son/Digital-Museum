@@ -7,7 +7,7 @@ from django.db import transaction
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
-        fields = ['ticket_type','price']
+        fields = ['id', 'ticket_type','price']
 
 
 
