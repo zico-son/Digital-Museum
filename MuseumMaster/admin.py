@@ -12,7 +12,6 @@ class MuseumInfoAdmin(admin.ModelAdmin):
 
 admin.site.register(models.Media)
 admin.site.register(models.MuseumInfo,MuseumInfoAdmin)
-admin.site.register(models.DownloadableItems)
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
@@ -21,6 +20,12 @@ class EventAdmin(admin.ModelAdmin):
     list_filter = ['active','date']
     list_editable = ['active']
     search_fields = ['name']
+
+@admin.register(DownloadableItems)
+class DownloadableItemsAdmin(admin.ModelAdmin):
+    list_display = ['name']
+    search_fields = ['name']
+
 
 @admin.register(OpenningHour)
 class OpenningHourAdmin(admin.ModelAdmin):
