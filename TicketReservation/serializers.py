@@ -1,8 +1,7 @@
 from rest_framework import serializers
 from .models import *
 from django.db import transaction
-
-
+from TicketReservation.utils import send_ticket_reservation_email
 
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:
@@ -54,27 +53,19 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = ['id','first_name','last_name','email','phone','date','tickets']
     def create(self, validated_data):
         with transaction.atomic():
-           tickets = validated_data.pop('tickets')
-           order = Order.objects.create(**validated_data)
-           ticket_items = [
-               OrderItem(  
+            tickets = validated_data.pop('tickets')
+            order = Order.objects.create(**validated_data)
+            ticket_items = [
+            OrderItem(  
                     order=order,
                     ticket=item['ticket'],
                     amount=item['amount'],
-               )for item in tickets
-           ]
-           order_item =OrderItem.objects.bulk_create(ticket_items)
-           return order
-           
-
-        
-
-
- 
-
-
-    
-    
-    
-
-    
+                )for item in tickets
+            ]
+            order_item =OrderItem.objects.bulk_create(ticket_items)
+            user_name= validated_data['first_name'] + " " + validated_data['last_name']
+            email = validated_data['email']
+            phone = validated_data['phone']
+            visit_date = validated_data['date']
+            send_ticket_reservation_email(user_name,email, phone,visit_date,tickets)
+            return order
