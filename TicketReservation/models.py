@@ -25,10 +25,10 @@ class Ticket(models.Model):
 
 
 class Order(models.Model):
-    first_name = models.CharField(max_length=50,blank=1,null=1)
-    last_name = models.CharField(max_length=50,blank=1,null=1)
-    email = models.EmailField(blank=1,null=1)
-    phone = PhoneNumberField(blank=1,null=1)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField(blank=1)
+    phone = PhoneNumberField(blank=1)
     date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=1)
     def name(self):
