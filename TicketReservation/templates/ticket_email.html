@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Reservation Confirmation</title>
+</head>
+<body>
+    <!-- <h1>Ticket Reservation Confirmation</h1> -->
+    <p>Hello {{ user }},</p>
+    <p>Welcome to The Royal Carriages Museum!</p>
+    <p>We are thrilled to announce that your visit to our museum on {{ visit_date }} has been confirmed.</p>
+    <p>Reservation Details:</p>
+    <ul>
+        <ul>
+            <li><strong>Tickets:</strong></li>
+            {% for ticket in tickets %}
+            <li><strong>Ticket Type:</strong> {{ ticket.ticket.ticket_type }} - <strong>Quantity:</strong> {{ ticket.amount }}</li>
+            {% endfor %}
+            <li><strong>Date:</strong> {{ visit_date }}</li>
+            <li><strong>Location:</strong> 26th of July Street, Boulaq, Cairo </li>
+        </ul>
+    </ul>
+    <p>Please keep this email as a proof of your reservation. Present it at the event entrance to collect your tickets.</p>
+    <p>If you have any questions or need further assistance, feel free to contact us at {{ contact_email }}.</p>
+    <p>Thank you for choosing our service!</p>
+    <p>Best regards,</p>
+    <p>The Royal Carriages Museum Team</p>
+</body>
+</html>
+
+
