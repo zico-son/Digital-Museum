@@ -36,9 +36,9 @@ class ArtObjectImage(models.Model):
     art_object = models.ForeignKey(ArtObject, on_delete=models.CASCADE, related_name='images')
     image = models.FileField(upload_to='images/')
     convert_image = models.BooleanField(default=False)
-    size_before_convert = models.FloatField(default=0, verbose_name = 'size before convert in MB')
-    size_after_convert = models.FloatField(default=0, verbose_name= 'size after convert in MB')
-    compression_ratio = models.FloatField(default=0, verbose_name='compression ratio %')
+    size_before_convert = models.FloatField(default=0, verbose_name = 'size before convert in MB', null=True)
+    size_after_convert = models.FloatField(default=0, verbose_name= 'size after convert in MB', null=True)
+    compression_ratio = models.FloatField(default=0, verbose_name='compression ratio %', null=True)
     quality = models.IntegerField(default=50, verbose_name='quality % (default = 50 %)', blank=True)
 
     def save(self, *args, **kwargs):
