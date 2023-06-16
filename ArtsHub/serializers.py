@@ -72,7 +72,13 @@ class ArtObjectSerializer(serializers.ModelSerializer):
                     if obj.other:
                         return 'other'
                 except:
-                    return 'holdings'
+                    try:
+                        if obj.holdings.count() > 0:
+                            return 'holding'
+                        else :
+                            return 'NoType'
+                    except:
+                        return 'NoType'
 
 
     def get_content(self, obj):
@@ -88,18 +94,32 @@ class ArtObjectSerializer(serializers.ModelSerializer):
                     if obj.other:
                         return OtherSerializer(obj.other).data
                 except:
-                    return HoldingSerializer(obj.holdings, many = True).data
+                    try:
+                        if obj.holdings.count() > 0:
+                            return HoldingSerializer(obj.holdings, many = True).data
+                        else :
+                            return 'NoContent'
+                    except:
+                        return 'NoContent'
 
     def get_status(self, obj):
         try:
             if obj.borrowed_collection:
                 return 'borrowed'
         except:
-            return 'Permanent'
+            try: 
+                if obj.permanent_collection:
+                    return 'permanent'
+            except:
+                return 'NoStatus'
 
     def get_status_info(self, obj):
         try:
             if obj.borrowed_collection:
                 return BorrowedCollectionSerializer(obj.borrowed_collection).data
         except:
-            return PermanentCollectionSerializer(obj.permanent_collection).data
+            try:
+                if obj.permanent_collection:
+                    return PermanentCollectionSerializer(obj.permanent_collection).data
+            except:
+                return 'NoStatusInfo'
