@@ -155,19 +155,19 @@ class ArtObjectAdmin(admin.ModelAdmin):
         .select_related('borrowed_collection') \
         .select_related('permanent_collection') \
         .all()
-    def message_user(self):
-        pass
-    def save_model(self, request, obj, form, change):
-        return super().save_model(request, obj, form, change)
+    # def message_user(self):
+    #     pass
+    # def save_model(self, request, obj, form, change):
+    #     return super().save_model(request, obj, form, change)
 
-    def response_change(self, request, obj):
-        try:
-            last = obj.images.last().id
-        except:
-            messages.success(request, f'Art Object updated successfully')
-            return redirect(f'/admin/ArtsHub/artobject/')
-        if obj.images.last().convert_image:
-            messages.success(request, f'Image converted successfully')
-            return redirect(f'/admin/ArtsHub/artobjectimage/{last}/change/')
-        messages.success(request, f'Art Object updated successfully')
-        return redirect(f'/admin/ArtsHub/artobject/')
+    # def response_change(self, request, obj):
+    #     try:
+    #         last = obj.images.last().id
+    #     except:
+    #         messages.success(request, f'Art Object updated successfully')
+    #         return redirect(f'/admin/ArtsHub/artobject/')
+    #     if obj.images.last().convert_image:
+    #         messages.success(request, f'Image converted successfully')
+    #         return redirect(f'/admin/ArtsHub/artobjectimage/{last}/change/')
+    #     messages.success(request, f'Art Object updated successfully')
+    #     return redirect(f'/admin/ArtsHub/artobject/')
