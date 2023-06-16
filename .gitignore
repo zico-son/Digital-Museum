@@ -8,3 +8,4 @@ migrations
 .env
 static
 db.sqlite3
+media
