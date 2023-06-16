@@ -41,3 +41,9 @@ class InfoSerializer(ModelSerializer):
     def get_event(self, obj):
         event = Event.objects.filter(active = True)
         return EventSerializer(event, many = True).data
+
+
+class HotelSerializer(ModelSerializer):
+    class Meta:
+        model = Hotels
+        fields = ['id', 'name','address','about','rating','link','image']

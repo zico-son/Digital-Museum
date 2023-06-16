@@ -61,3 +61,16 @@ class DownloadableItems(models.Model):
     name = models.CharField(max_length=255,null=True,blank=True)
     link = models.FileField(upload_to= 'files', blank= True, null=True)
     museum_info = models.ForeignKey('MuseumInfo', on_delete=models.PROTECT,related_name= 'downloadableItems')
+
+
+class Hotels(models.Model):
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    about = models.TextField()
+    rating = models.FloatField()
+    image = models.ImageField(upload_to='images')
+    link = models.URLField()
+    def __str__(self) -> str:
+        return self.name
+    class Meta:
+        verbose_name_plural = "Hotels"
