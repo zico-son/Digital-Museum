@@ -8,13 +8,13 @@ In a conventional museum setup, visitors often encounter challenges such as prol
 
 ## 📚 Table of Contents
 
-- [Project Overview](#project-overview)
-- [Technical Stack](#technical-stack)
-- [Setup and Installation](#setup-and-installation)
-- [Usage](#usage)
-- [Admin Panel](#admin-panel)
-- [API Endpoints](#api-endpoints)
-- [License](#license)
+- [Project Overview](#-project-overview)
+- [Technical Stack](#-technical-stack)
+- [Setup and Installation](#-setup-and-installation)
+- [Usage](#-usage)
+- [Admin Panel](#-admin-panel)
+- [License](#-license)
+
 
 ## 🖼 Project Overview
 
@@ -96,3 +96,39 @@ python manage.py migrate
 
 # Run the server
 python manage.py runserver
+```
+## 📖 Usage
+
+To facilitate a smooth user experience, it is pivotal to familiarize oneself with the functioning of each app. Below, we delve into the operational nuances of each section:
+
+### Ticket Booking
+
+This section encompasses a series of endpoint details and guidelines to optimally utilize the Ticket Booking app functionalities. Here, users can find out how to book, manage, and cancel their tickets seamlessly.
+
+### Museum Info
+
+Get comprehensive endpoint specifications and a user guide to make the most of the Museum Info app's features. Learn how to navigate through various exhibits and stay updated with the latest events.
+
+### Art Hub
+
+Find detailed endpoint elaborations and instructions to unlock a rich art exploration experience through the Art Hub. This guide aids users in interacting with high-resolution images and learning more about their favorite artists.
+
+## 🛡 Admin Panel
+
+The Admin Panel serves as a centralized system for staff to manage and oversee the operations of the digital museum platform efficiently. Here's what you need to know:
+
+### Access
+
+- **URL**: _[admin panel URL]_
+- **Default Credentials**:
+  - **Username**: admin
+  - **Password**: admin1234
+- **Credential Modification**: Users can follow a series of steps to change the default credentials to more personalized ones.
+
+### Functionalities
+
+Providing a comprehensive overview of the functionalities available in the admin panel, including user management, content moderation, and report generation. Staff members can find guidelines on how to update exhibit details, manage bookings, and much more.
+
+
+## 📜 License
+This project is licensed under a permissive license that allows for free use, distribution, and modification by all. For more details, refer to the LICENSE file in the project repository.
